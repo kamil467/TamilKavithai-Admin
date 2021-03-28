@@ -1,12 +1,19 @@
 
 <ion-header *ngIf="category | async as cat;">
-  <ion-toolbar color="headcolor">
+  <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button auto-hide="false"></ion-menu-button>
     </ion-buttons>
-    <ion-title >
-       {{cat.name}}  
-    </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="presentPopover($event)">
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical">
+
+        </ion-icon>
+       
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>{{cat.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 

@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AdMobPro } from '@ionic-native/admob-pro/ngx';
-import { AlertController } from '@ionic/angular';
+import { AlertController, PopoverController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { adMob } from 'src/environments/environment';
 import { category, Kavithai } from '../interface/kavithai';
 import { KavithaiServiceService } from '../service/kavithai-service.service';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { PopoverComponent } from '../components/popover/popover.component';
 
 @Component({
   selector: 'app-folder',
@@ -22,13 +23,23 @@ export class FolderPage implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
     private kservice:KavithaiServiceService,
     public alert:AlertController,private socialSharing: SocialSharing,
-    private adMob:AdMobPro) { }
+    private adMob:AdMobPro,public popoverCtrl: PopoverController) { }
 
   ngOnInit() {
     this.banner();
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
     this.category = this.kservice.getCategoryById(this.folder);
     this.kavithaiList = this.kservice.getAllKavithaiByCatId(this.folder); // passing the cat id;
+  }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverCtrl.create({
+      component: PopoverComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 
   banner() {

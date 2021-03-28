@@ -12,6 +12,7 @@ import { firebaseConfig } from 'src/environments/environment';
 import {MatDividerModule} from '@angular/material/divider';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
  import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic/ngx";
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

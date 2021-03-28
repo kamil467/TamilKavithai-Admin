@@ -1,0 +1,58 @@
+<ion-header translucent="true">
+  
+  <ion-toolbar color="crimson">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  Author Login
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-card *ngIf="!isLoggedIn" >
+  <ion-card-header color="crimson">
+    Login
+  </ion-card-header>
+  <ion-card-content>
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+
+      <ion-item>
+
+        <ion-label><ion-note>Email(*)</ion-note></ion-label>
+        <ion-input type="text" [(ngModel)]="email" name="email" id="email" class="form-control" required ></ion-input>
+      
+
+
+
+      </ion-item>
+      <ion-item>
+        <ion-label><ion-note>Password(*)</ion-note></ion-label>
+        <ion-input type="password" [(ngModel)]="password" class="form-control" name="password"   required></ion-input>
+      </ion-item>
+      <ion-button type="submit" style="color:white" [disabled]="loginForm.form.invalid" >Sign in</ion-button>
+
+    </form>
+
+      <ion-note>
+        Please kindly contact support team if you face any issues.
+      </ion-note>
+    
+  
+  </ion-card-content>
+</ion-card>
+
+<ion-card *ngIf="isLoggedIn">
+  <ion-card-header>
+    LoggedIn
+  </ion-card-header>
+  <ion-card-content>
+    <ion-label>
+      User {{loggedInName}}  - currently logged in.
+    </ion-label>
+    <p>
+      <ion-button  style="color:white" (click)="presentLogOutConfirm()" >Logout</ion-button>
+    </p>
+    
+  </ion-card-content>
+</ion-card>
+</ion-content>

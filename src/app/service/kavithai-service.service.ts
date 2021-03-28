@@ -92,5 +92,28 @@ export class KavithaiServiceService {
    return kavithai;
   }
 
+  //create new category into firestore with custom id.
+  createCategory(catName:string,catId:string):Promise<any>
+  {
+    console.log(catName);
+    
+    const result = this.angularFireCloudStore
+    .collection<category>(FirebaseCollectionAPI.categories).doc(catId)
+    .set({name:catName,id:catId})
+    .then(()=>{
+      return true;
+    }).catch(err => this.handleError(err));
+   return result;
+  }
+
+  createNewKavithai(kav:Kavithai):Promise<any>
+  {
+    const result = this.angularFireCloudStore
+    .collection<Kavithai>(FirebaseCollectionAPI.kavithai).add(kav)
+    .then(()=>{
+      return true;
+    }).catch(err => this.handleError(err));
+   return result;
+  }
 
 }
